@@ -1,0 +1,36 @@
+{
+  "filename": {
+    "rules": [
+      {
+        "name": "Prefix",
+        "description": "commence par 'alertes' ou 'informations'",
+        "regex": "(alertes|informations).*"
+      },
+      {
+        "name": "Extension",
+        "description": "se termine par '.csv'",
+        "regex": ".*\\.csv"
+      },
+      {
+        "name": "Date",
+        "description": "contient une date au format AAAAMMJJ",
+        "regex": ".*(20\\d{2})(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])(07|09|12|19|21).*"
+      },
+      {
+        "name": "All in one",
+        "description": "Vérifie tout d'un coup",
+        "regex": "(alertes|informations)(20\\d{2})(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])(07|09|12|19|21)*\\.csv"
+      }
+    ]
+  },
+  "cols": [
+    {
+      "title": "col 1",
+      "rules": ["[a,b,c]+", "\\w{1}"]
+    },
+    {
+      "title": "col 1",
+      "rules": ["[a,b,c]+", "\\w{1}"]
+    }
+  ]
+}

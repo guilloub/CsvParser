@@ -1,0 +1,11 @@
+INSEE_CO;CP;SUPERFICIE;POPULATION;prob;severite;type_evt;survenance;csq;date_bulletin;Heure_d�p�t;date_prevision;Type 
+" = droite(""0""&INSEE_CO;5)";" = droite(""0""&CP;5)";nb;nb;10;1;Tempetes;Matin;;JJ/MM/AAAA;7;JJ/MM/AAAA;Alerte
+;;;;20;2;Inondations fluviales;Apr�s midi;;;12;;Alerte
+;;;;30;3;Inondations pluies;Soir;;;19;;Alerte
+;;;;40;;Inondations par submersion;Nuit;;;9;;Information
+;;;;50;;Orage;;;;21;;Information
+;;;;60;;Grele;;;;;;
+;;;;70;;Neige;;;;;;
+;;;;80;;;;;;;;
+;;;;90;;;;;;;;
+;;;;100;;;;;;;salut l'amérique "guillemets";
