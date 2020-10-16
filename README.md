@@ -70,13 +70,13 @@ Le résultat de l'analyse est écrit dans un fichier `output.json` qui est cré�
   "filename": {
     "Prefix": 1, // La règle dont le nom est "Prefix" a été 1 fois en erreur
   },
-  // Première colonne
-  "1": {
-    "Header": "expected: 'Type', actual: 'Toto'", // Le nom de la colonne n'est pas le bon
+  // Colonne "CP"
+  "CP": {
+    "Header": "expected: 'CP', actual: 'Toto'", // Le nom de la colonne n'est pas le bon
     "Only Numbers": 3 // La règle dont le nom est "Only Numbers" a été 3 fois en erreur
   },
-  // 5ème colonne
-  "5": {...}
+  // colonne "INSEE_CO"
+  "INSEE_CO": {...}
 }
 ```
 

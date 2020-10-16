@@ -2,6 +2,7 @@ import csv
 import sys
 import json
 import re
+import ntpath
 
 # TODO: fix encoding errror in config file
 # TODO: split file path to extract name
@@ -14,9 +15,7 @@ if len(sys.argv) == 1:
     Missing parameters !
     expected syntax : py app.py <csv_file> [<config_file>]
     """)
-    # sys.exit()
-    csv_file = "d:\projets\HelloPython\samples\\alertes2020012207.csv"
-    config_file = "./config.json"
+    sys.exit()
 
 elif len(sys.argv) == 2:
     print("No config file given\nUsing default file './config.json'")
@@ -30,12 +29,10 @@ print(f"csv file : {csv_file}")
 print(f"config_file : {config_file}")
 
 
-def logError(col_index, errorName, errorMessage=0):
-    if isinstance(col_index, int):
-        col_index += 1
-    errors.setdefault(col_index, {}).setdefault(errorName, errorMessage)
+def logError(key, errorName, errorMessage=0):
+    errors.setdefault(key, {}).setdefault(errorName, errorMessage)
     if type(errorMessage) == int:
-        errors[col_index][errorName] += 1
+        errors[key][errorName] += 1
     pass
 
 ###
@@ -55,9 +52,10 @@ def checkRule(value: str, regex: str) -> bool:
 def checkRow(row):
     for index, cell in enumerate(row):
         rules = configs["cols"][index]["rules"]
+        header = configs["cols"][index]["header"]
         for rule in rules:
             if not checkRule(cell, rule["regex"]):
-                logError(index, rule["name"])
+                logError(header, rule["name"])
     pass
 
 
@@ -66,21 +64,22 @@ def checkHeaders(headers):
         header = configs["cols"][index]["header"]
 
         if header != cell:
-            logError(index, 'Header',
+            logError(header, 'Header',
                      f"expected: '{header}', actual: '{cell}'")
     pass
 
 
 def checkFileName():
-    has_errors = False
+    filename = ntpath.basename(csv_file)
+
     for rule in configs["filename"]["rules"]:
-        if not checkRule(csv_file, rule["regex"]):
+        if not checkRule(filename, rule["regex"]):
             logError("filename", rule['name'])
 
 
 def writeOutputFile():
     content = "TOUT EST OK - GO POUR DIFFUSION :D"
-    with open('result.json', 'w', encoding='utf-8') as json_file:
+    with open('result.json', 'w') as json_file:
         if len(errors) != 0:
             content = errors
             print("DES ERREURS ONT ETE DETECTEES :(")

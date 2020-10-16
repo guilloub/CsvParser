@@ -4,7 +4,7 @@
       {
         "name": "Prefix",
         "description": "commence par 'alertes' ou 'informations'",
-        "regex": "aze(alertes|informations).*"
+        "regex": "(alertes|informations).*"
       },
       {
         "name": "Extension",
@@ -40,7 +40,7 @@
         {
           "name": "CP-5-chiffres",
           "description": "",
-          "regex": "\\d{4}"
+          "regex": "\\d{5}"
         }
       ]
     },
@@ -48,9 +48,9 @@
       "header": "SUPERFICIE",
       "rules": [
         {
-          "name": "RuleName",
-          "description": "",
-          "regex": ".*"
+          "name": "isNumber",
+          "description": "est un nombre",
+          "regex": "\\d+"
         }
       ]
     },
@@ -58,9 +58,9 @@
       "header": "POPULATION",
       "rules": [
         {
-          "name": "RuleName",
-          "description": "",
-          "regex": ".*"
+          "name": "isNumber",
+          "description": "est un nombre",
+          "regex": "\\d+"
         }
       ]
     },
@@ -98,7 +98,7 @@
       "header": "survenance",
       "rules": [
         {
-          "name": "RuleName",
+          "name": "survenance",
           "description": "",
           "regex": "(Matin|Après midi|Soir|Nuit)"
         }
@@ -108,9 +108,9 @@
       "header": "csq",
       "rules": [
         {
-          "name": "RuleName",
-          "description": "",
-          "regex": ".*"
+          "name": "vide",
+          "description": "n'importe quel caractère exactement 0 fois",
+          "regex": ".{0}"
         }
       ]
     },
