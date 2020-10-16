@@ -1,2 +1,4 @@
 result.json
 samples/
+.vscode/
+.mypy_cache/
