@@ -50,6 +50,12 @@ def checkRule(value: str, regex: str) -> bool:
 
 
 def checkRow(row):
+    # Vérifie qu'il n'y ai pas de colonne en plus ou en moins
+    if len(row) != len(configs["cols"]):
+        logError("NbCols", "NbCols",
+                 f"expected {len(configs['cols'])} cell on row, got {len(row)}")
+        return
+
     for index, cell in enumerate(row):
         rules = configs["cols"][index]["rules"]
         header = configs["cols"][index]["header"]
@@ -60,6 +66,12 @@ def checkRow(row):
 
 
 def checkHeaders(headers):
+    # Vérifie qu'il n'y ai pas de colonne en plus ou en moins
+    if len(headers) != len(configs["cols"]):
+        logError("NbCols", "Header",
+                 f"expected {len(configs['cols'])} headers, got {len(headers)}")
+        return False
+
     for index, cell in enumerate(headers):
         header = configs["cols"][index]["header"]
 
@@ -103,4 +115,5 @@ with open(csv_file, newline='') as f:
         #     checkRow(row)
         else:
             checkRow(row)
+
     writeOutputFile()        # break
