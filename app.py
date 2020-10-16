@@ -3,14 +3,19 @@ import sys
 import json
 import re
 
+
 print("*"*50)
+errors: dict = {}
 
 if len(sys.argv) == 1:
     print("""
     Missing parameters !
     expected syntax : py app.py <csv_file> [<config_file>]
     """)
-    sys.exit()
+    # sys.exit()
+    csv_file = "d:\projets\HelloPython\samples\\alertes2020012207.csv"
+    config_file = "./config.json"
+
 elif len(sys.argv) == 2:
     print("No config file given\nUsing default file './config.json'")
     csv_file = sys.argv[1]
@@ -40,14 +45,28 @@ def checkRule(value: str, regex: str) -> bool:
 
 
 def checkRow(row):
-    for col_index, cell in enumerate(row):
-        print(col_index, cell)
+    for index, cell in enumerate(row):
+        rules = configs["cols"][index]["rules"]
+        for rule in rules:
+            if not checkRule(cell, rule["regex"]):
+                logError(index, rule["name"])
+    pass
+
+
+def logError(col_index, errorName, errorMessage=0):
+    col_index += 1
+    errors.setdefault(col_index, {}).setdefault(errorName, errorMessage)
+    if type(errorMessage) == int:
+        errors[col_index][errorName] += 1
     pass
 
 
 def checkHeaders(headers):
-    for col_index, cell in enumerate(headers):
-        print(col_index, cell)
+    for index, cell in enumerate(headers):
+        title = configs["cols"][index]["title"]
+
+        if title != cell:
+            logError(index, 'Title', f"expected: '{title}', actual: '{cell}'")
     pass
 
 
@@ -66,7 +85,14 @@ def checkFileName():
         print("All rules OK")
 
 
-# checkFileName()
+def writeOutputFile():
+    content = "TOUT EST OK - GO POUR DIFFUSION :D"
+    with open('result.json', 'w') as json_file:
+        if len(errors) != 0:
+            content = errors
+        print(errors)
+        json.dump(content, json_file, indent=2, sort_keys=True)
+
 
 with open(csv_file, newline='') as f:
     reader = csv.reader(f, delimiter=';')
@@ -74,8 +100,8 @@ with open(csv_file, newline='') as f:
     for row_index, row in enumerate(reader):
         if(row_index == 0):
             checkHeaders(row)
-            print('-'*50)
-        elif(row_index < 3):
-            checkRow(row)
+        # elif(row_index <= 100):
+        #     checkRow(row)
         else:
-            break
+            checkRow(row)
+    writeOutputFile()        # break

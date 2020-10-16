@@ -25,12 +25,134 @@
   },
   "cols": [
     {
-      "title": "col 1",
-      "rules": ["[a,b,c]+", "\\w{1}"]
+      "title": "INSEE_CO",
+      "rules": [
+        {
+          "name": "Insee-5-chiffres",
+          "description": "",
+          "regex": "\\d{5}"
+        }
+      ]
     },
     {
-      "title": "col 1",
-      "rules": ["[a,b,c]+", "\\w{1}"]
+      "title": "CP",
+      "rules": [
+        {
+          "name": "CP-5-chiffres",
+          "description": "",
+          "regex": "\\d{4}"
+        }
+      ]
+    },
+    {
+      "title": "SUPERFICIE",
+      "rules": [
+        {
+          "name": "RuleName",
+          "description": "",
+          "regex": ".*"
+        }
+      ]
+    },
+    {
+      "title": "POPULATION",
+      "rules": [
+        {
+          "name": "RuleName",
+          "description": "",
+          "regex": ".*"
+        }
+      ]
+    },
+    {
+      "title": "prob",
+      "rules": [
+        {
+          "name": "RuleName",
+          "description": "",
+          "regex": ".*"
+        }
+      ]
+    },
+    {
+      "title": "severite",
+      "rules": [
+        {
+          "name": "RuleName",
+          "description": "",
+          "regex": ".*"
+        }
+      ]
+    },
+    {
+      "title": "type_evt",
+      "rules": [
+        {
+          "name": "RuleName",
+          "description": "",
+          "regex": ".*"
+        }
+      ]
+    },
+    {
+      "title": "survenance",
+      "rules": [
+        {
+          "name": "RuleName",
+          "description": "",
+          "regex": ".*"
+        }
+      ]
+    },
+    {
+      "title": "csq",
+      "rules": [
+        {
+          "name": "RuleName",
+          "description": "",
+          "regex": ".*"
+        }
+      ]
+    },
+    {
+      "title": "date_bulletin",
+      "rules": [
+        {
+          "name": "RuleName",
+          "description": "",
+          "regex": ".*"
+        }
+      ]
+    },
+    {
+      "title": "Heure_dépôt",
+      "rules": [
+        {
+          "name": "RuleName",
+          "description": "",
+          "regex": ".*"
+        }
+      ]
+    },
+    {
+      "title": "date_prevision",
+      "rules": [
+        {
+          "name": "RuleName",
+          "description": "",
+          "regex": ".*"
+        }
+      ]
+    },
+    {
+      "title": "Type",
+      "rules": [
+        {
+          "name": "rule for Type",
+          "description": "",
+          "regex": "az"
+        }
+      ]
     }
   ]
 }
