@@ -3,6 +3,8 @@ import sys
 import json
 import re
 
+# TODO: fix encoding errror in config file
+# TODO: split file path to extract name
 
 print("*"*50)
 errors: dict = {}
@@ -28,13 +30,19 @@ print(f"csv file : {csv_file}")
 print(f"config_file : {config_file}")
 
 
-with open(config_file) as f:
-    configs = json.load(f)
-
+def logError(col_index, errorName, errorMessage=0):
+    if isinstance(col_index, int):
+        col_index += 1
+    errors.setdefault(col_index, {}).setdefault(errorName, errorMessage)
+    if type(errorMessage) == int:
+        errors[col_index][errorName] += 1
+    pass
 
 ###
 #  Verify if the value string is an exact match for the regex
 ###
+
+
 def checkRule(value: str, regex: str) -> bool:
     p = re.compile(regex)
     m = p.fullmatch(value)
@@ -53,46 +61,38 @@ def checkRow(row):
     pass
 
 
-def logError(col_index, errorName, errorMessage=0):
-    col_index += 1
-    errors.setdefault(col_index, {}).setdefault(errorName, errorMessage)
-    if type(errorMessage) == int:
-        errors[col_index][errorName] += 1
-    pass
-
-
 def checkHeaders(headers):
     for index, cell in enumerate(headers):
-        title = configs["cols"][index]["title"]
+        header = configs["cols"][index]["header"]
 
-        if title != cell:
-            logError(index, 'Title', f"expected: '{title}', actual: '{cell}'")
+        if header != cell:
+            logError(index, 'Header',
+                     f"expected: '{header}', actual: '{cell}'")
     pass
 
 
 def checkFileName():
-    print("filename: ", csv_file)
-
     has_errors = False
     for rule in configs["filename"]["rules"]:
         if not checkRule(csv_file, rule["regex"]):
-            print(f"Rule '{rule['name']}' not respected")
-            has_errors = True
-        else:
-            print(f"rule '{rule['name']}' OK")
-
-    if not has_errors:
-        print("All rules OK")
+            logError("filename", rule['name'])
 
 
 def writeOutputFile():
     content = "TOUT EST OK - GO POUR DIFFUSION :D"
-    with open('result.json', 'w') as json_file:
+    with open('result.json', 'w', encoding='utf-8') as json_file:
         if len(errors) != 0:
             content = errors
-        print(errors)
-        json.dump(content, json_file, indent=2, sort_keys=True)
+            print("DES ERREURS ONT ETE DETECTEES :(")
+        else:
+            print(content)
+        json.dump(content, json_file, indent=2)
 
+
+with open(config_file, encoding='utf-8') as f:
+    configs = json.load(f)
+
+checkFileName()
 
 with open(csv_file, newline='') as f:
     reader = csv.reader(f, delimiter=';')

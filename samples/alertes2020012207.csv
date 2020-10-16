@@ -1,10 +1,10 @@
-INSEE_CO;CP;SUPERFICIE;POPULATION;prob;severite;type_evt;survenance;csq;date_bulletin;Heure_dépôt;date_prevision;Type 
+INSEE_CO;CP;SUPERFICIE;POPULATION;prob;severite;type_evt;survenance;csq;date_bulletin;Heure_dï¿½pï¿½t;date_prevision;Type 
 09176;09250;2655;551;40;2;Inondations pluies;Matin;;22/01/2020;7;22/01/2020;Alerte
 11001;11800;1056;521;40;2;Inondations pluies;Matin;;22/01/2020;7;22/01/2020;Alerte
-11092;11160;1765;81;40;2;Inondations pluies;Matin;;22/01/2020;7;22/01/2020;Alerte
+11092;11160;1765;81;40;2;Inondations pluies;Matin;;22/01/2020;7;22/01/2020;Alertes
 09043;09600;481;727;40;2;Inondations pluies;Matin;;22/01/2020;7;22/01/2020;Alerte
 11204;11240;752;36;40;2;Inondations pluies;Matin;;22/01/2020;7;22/01/2020;Alerte
-11011;11600;2147;414;40;2;Inondations pluies;Matin;;22/01/2020;7;22/01/2020;Alerte
+11011;11600;2147;414;40;2;Inoddations pluies;Matin;;22/01/2020;7;22/01/2020;Alerte
 11246;11240;447;59;40;2;Inondations pluies;Matin;;22/01/2020;7;22/01/2020;Alerte
 09215;09300;557;122;40;2;Inondations pluies;Matin;;22/01/2020;7;22/01/2020;Alerte
 66075;66800;2053;131;40;2;Inondations pluies;Matin;;22/01/2020;7;22/01/2020;Alerte
