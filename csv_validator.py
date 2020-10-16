@@ -4,29 +4,7 @@ import json
 import re
 import ntpath
 
-# TODO: fix encoding errror in config file
-# TODO: split file path to extract name
-
-print("*"*50)
-errors: dict = {}
-
-if len(sys.argv) == 1:
-    print("""
-    Missing parameters !
-    expected syntax : py app.py <csv_file> [<config_file>]
-    """)
-    sys.exit()
-
-elif len(sys.argv) == 2:
-    print("No config file given\nUsing default file './config.json'")
-    csv_file = sys.argv[1]
-    config_file = "./config.json"
-else:
-    csv_file = sys.argv[1]
-    config_file = sys.argv[2]
-
-print(f"csv file : {csv_file}")
-print(f"config_file : {config_file}")
+# Add an error into the dictionary
 
 
 def logError(key, errorName, errorMessage=0):
@@ -35,11 +13,8 @@ def logError(key, errorName, errorMessage=0):
         errors[key][errorName] += 1
     pass
 
-###
+
 #  Verify if the value string is an exact match for the regex
-###
-
-
 def checkRule(value: str, regex: str) -> bool:
     p = re.compile(regex)
     m = p.fullmatch(value)
@@ -47,6 +22,8 @@ def checkRule(value: str, regex: str) -> bool:
         return True
     else:
         return False
+
+# Check each cell of a row all regex
 
 
 def checkRow(row):
@@ -63,6 +40,8 @@ def checkRow(row):
             if not checkRule(cell, rule["regex"]):
                 logError(header, rule["name"])
     pass
+
+# verify number of columns and their names
 
 
 def checkHeaders(headers):
@@ -100,11 +79,33 @@ def writeOutputFile():
         json.dump(content, json_file, indent=2)
 
 
+####################################################
+errors: dict = {}
+
+# Check input parameters
+if len(sys.argv) == 1:
+    print("""
+    Missing parameters !
+    expected syntax : py app.py <csv_file> [<config_file>]
+    """)
+    sys.exit()
+elif len(sys.argv) == 2:
+    csv_file = sys.argv[1]
+    config_file = ".\config.json"
+else:
+    csv_file = sys.argv[1]
+    config_file = sys.argv[2]
+
+print(f"csv file : {csv_file}")
+print(f"config_file : {config_file}")
+
+# load config file
 with open(config_file, encoding='utf-8') as f:
     configs = json.load(f)
 
 checkFileName()
 
+# load and check csv file against loaded configuration
 with open(csv_file, newline='') as f:
     reader = csv.reader(f, delimiter=';')
 
@@ -116,4 +117,4 @@ with open(csv_file, newline='') as f:
         else:
             checkRow(row)
 
-    writeOutputFile()        # break
+    writeOutputFile()
