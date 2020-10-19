@@ -73,7 +73,7 @@ def writeOutputFile():
     with open('result.json', 'w') as json_file:
         if len(errors) != 0:
             content = errors
-            print("DES ERREURS ONT ETE DETECTEES :(")
+            print(f"{len(errors)} ERREURS DETECTEE(S) :(")
         else:
             print(content)
         json.dump(content, json_file, indent=2)
