@@ -34,8 +34,8 @@
       "rules": [
         {
           "name": "Insee-5-chiffres",
-          "description": "",
-          "regex": "\\d{5}"
+          "description": "5 chiffres avec potentiellement une lettre en 2ème position (corse)",
+          "regex": "(\\d{5}|\\d{1}(A|B)\\d{3}"
         }
       ]
     },
