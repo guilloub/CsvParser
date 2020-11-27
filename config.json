@@ -13,13 +13,18 @@
       },
       {
         "name": "Date",
-        "description": "contient une date au format AAAAMMJJ",
+        "description": "contient une date au format AAAAMMJJHH",
         "regex": ".*(20\\d{2})(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])(07|09|12|19|21).*"
       },
       {
+        "name": "Heures possibles pour les alertes/informations",
+        "description": "alertes : 9h, 21h ; informations : 7h, 12h 19h",
+        "regex": "(alertes.*(07|12|19)|informations.*(09|21))\\.csv"
+      },
+      {
         "name": "All in one",
-        "description": "Vérifie tout d'un coup",
-        "regex": "(alertes|informations)(20\\d{2})(0[1-9]|1[012])([012][0-9]|3[01])(07|09|12|19|21)*\\.csv"
+        "description": "Vérifie tout le nom du fichier d'un coup",
+        "regex": "(alertes(20\\d{2})(0[1-9]|1[012])([012][0-9]|3[01])(07|12|19)|informations(20\\d{2})(0[1-9]|1[012])([012][0-9]|3[01])(09|21))\\.csv"
       }
     ]
   },
